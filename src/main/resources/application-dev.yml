@@ -1,0 +1,56 @@
+server:
+  port: 8767
+spring:
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 807619751@qq.com
+          from: 1931931123@qq.com
+  mail:
+    host: smtp.qq.com
+    username: 1931931123@qq.com
+    password: qijfgccpuelzfcef
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  application:
+    name: admin-server
+  #security.user.name
+  #SpringBootAdmin登录时的用户名
+  #security.user.password
+  #SpringBootAdmin登录时的密码
+  security:
+    user:
+      name: admin
+      password: admin
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    #eureka.instance.metadata-map.user.name
+    #SpringBootAdmin本身作为一个Eureka客户端被发现，这里由于SpringBootAdmin需要进行登录，因此，此处配置SpringBootAdmin登录时使用的用户名
+    #eureka.instance.metadata-map.user.password
+    #同上，配置SpringBootAdmin登录使用的密码
+    metadata-map:
+      user:
+        name: admin
+        password: admin
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: http://eureka1:8761/eureka/,http://eureka2:8762/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        #暴露actuator的所有端点
+        include: "*"
+  endpoint:
+    health:
+      #health endpoint是否必须显示全部细节。默认情况下,/actuator/health 是公开的,并且不显示细节
+      show-details: ALWAYS
